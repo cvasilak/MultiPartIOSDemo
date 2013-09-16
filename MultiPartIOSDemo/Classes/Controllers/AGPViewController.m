@@ -32,7 +32,7 @@
         NSLog(@"Successfully uploaded!");
 
     } failure:^(NSError *error) {
-        NSLog(@"An error has occured during read! \n%@", error);
+        NSLog(@"An error has occured during upload! \n%@", error);
     }];
 }
 
