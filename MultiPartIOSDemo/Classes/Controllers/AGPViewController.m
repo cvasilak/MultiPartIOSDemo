@@ -19,7 +19,7 @@
     NSURL *file1 = [[NSBundle mainBundle] URLForResource:@"jboss" withExtension:@"jpg"];
     NSURL *file2 = [[NSBundle mainBundle] URLForResource:@"jboss2" withExtension:@"jpg"];
 
-    // construct the data to sent with the files addes
+    // construct the data to sent with the files added
     NSDictionary *dict = @{@"somekey": @"somevalue", @"jboss.jpg":file1, @"jboss2.jpg":file2 };
     
     // set an (optional) progress block
