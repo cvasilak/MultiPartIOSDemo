@@ -15,12 +15,32 @@
     // access the singleton instance that holds our pipes
     MultiPartIOSDemoAPIClient *apiClient = [MultiPartIOSDemoAPIClient sharedInstance];
     
-    // the files to be uploaded
+    // add local files
     NSURL *file1 = [[NSBundle mainBundle] URLForResource:@"jboss" withExtension:@"jpg"];
     NSURL *file2 = [[NSBundle mainBundle] URLForResource:@"jboss2" withExtension:@"jpg"];
+    AGFilePart *filePart1 = [[AGFilePart alloc]initWithFileURL:file1 name:@"file1"];
+    AGFilePart *filePart2 = [[AGFilePart alloc]initWithFileURL:file2 name:@"file2"];
+    
+    // add straight data objects
+    
+    // add simple text
+    NSData *data1 = [@"Lorem ipsum dolor sit amet," dataUsingEncoding:NSUTF8StringEncoding];
+    AGFileDataPart *dataPart1 = [[AGFileDataPart alloc] initWithFileData:data1
+                                                                    name:@"data1"
+                                                                fileName:@"data1.txt" mimeType:@"text/plain"];
 
-    // construct the data to sent with the files added
-    NSDictionary *dict = @{@"somekey": @"somevalue", @"jboss.jpg":file1, @"jboss2.jpg":file2 };
+    // add binary data
+    NSData *data2 = [NSData dataWithContentsOfURL:file1];
+    AGFileDataPart *dataPart2 = [[AGFileDataPart alloc] initWithFileData:data2
+                                                                    name:@"data2"
+                                                                fileName:@"data2.png" mimeType:@"image/jpeg"];
+    
+    // set up payload
+    NSDictionary *dict = @{@"somekey": @"somevalue",
+                           @"file1":filePart1,
+                           @"file2":filePart2,
+                           @"data1:": dataPart1,
+                           @"data2:": dataPart2};
     
     // set an (optional) progress block
     [[apiClient uploadPipe] setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
