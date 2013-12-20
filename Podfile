@@ -1,3 +1,3 @@
 platform :ios, '5.0'
          
-pod 'AeroGear', :git => 'file:///Users/cvasilak/Projects/JBoss/AeroGear/cvasilak/aerogear-ios', :branch => 'nsdata.AGIOS-131' 
+pod 'AeroGear', :git => 'https://github.com/cvasilak/aerogear-ios.git', :branch => 'nsdata.AGIOS-131' 
