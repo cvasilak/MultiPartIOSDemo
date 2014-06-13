@@ -43,13 +43,13 @@
                            @"data2:": dataPart2};
     
     // set an (optional) progress block
-    [[apiClient uploadPipe] setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-        NSLog(@"UPLOADPIPE Sent bytesWritten=%d totalBytesWritten=%qi of totalBytesExpectedToWrite=%qi bytes", bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+    [[apiClient uploadPipe] setUploadProgressBlock:^(NSURLSession *session, NSURLSessionTask *task, int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+        NSLog(@"UPLOADPIPE Sent bytesWritten=%lld totalBytesWritten=%qi of totalBytesExpectedToWrite=%qi bytes", bytesSent, totalBytesSent, totalBytesExpectedToSend);
     }];
     
     // upload data
     [[apiClient uploadPipe] save:dict success:^(id responseObject) {
-        NSLog(@"Successfully uploaded!");
+        NSLog(@"%@", [responseObject description]);
 //
 
     } failure:^(NSError *error) {
